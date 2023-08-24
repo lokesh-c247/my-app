@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { API_ENDPOINT } from "../components/CONSTANTS/constants";
 
 interface Rating {
     rate : number,
@@ -20,7 +21,7 @@ interface Product {
 
 // eslint-disable-next-line max-len
 export const allData = createAsyncThunk("quantitySlice/fetchProducts" , async() => {
-    const response = await fetch("https://fakestoreapi.com/products");
+    const response = await fetch(API_ENDPOINT);
     const data = await response.json();
     return data;
 });
