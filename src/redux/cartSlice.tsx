@@ -21,7 +21,7 @@ interface CartState {
 
 const initialState : CartState = {
     items : []
-}
+};
 
 const cartSlice = createSlice({
     name : "cart",
@@ -32,14 +32,15 @@ const cartSlice = createSlice({
         },
         removeItem : (state , action) => {            
             const itemIdToRemove = action.payload;
-            const itemToRemove = state.items.find((item) => item.id === itemIdToRemove)
-            state.items = state.items.filter((item)=> item !==  itemToRemove)
+            // eslint-disable-next-line max-len
+            const itemToRemove = state.items.find((item) => item.id === itemIdToRemove);
+            state.items = state.items.filter((item)=> item !==  itemToRemove);
         },
         clearCart : (state) => {
-            state.items = []
+            state.items = [];
         }
     }
-})
+});
 
 export const  {addItem,removeItem,clearCart} = cartSlice.actions;
 export default cartSlice.reducer;

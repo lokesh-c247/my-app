@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface Rating {
     rate : number,
@@ -17,9 +18,9 @@ interface Product {
     quantity: number;
 }
 
-
+// eslint-disable-next-line max-len
 export const allData = createAsyncThunk("quantitySlice/fetchProducts" , async() => {
-    const response = await fetch("https://fakestoreapi.com/products")
+    const response = await fetch("https://fakestoreapi.com/products");
     const data = await response.json();
     return data;
 });
@@ -30,10 +31,7 @@ interface QuantityState {
 
 const initialState : QuantityState = {
     allProducts : []
-}
-
-
-
+};
 
 const quantitySlice = createSlice({
     name : "quantity",
@@ -41,12 +39,11 @@ const quantitySlice = createSlice({
     reducers : {
         increaseQuantity : (state , action:PayloadAction<number>) => {
             const productId = action.payload;
-            const product = state.allProducts.find((item) => item.id === productId)
+            const product = state.allProducts.find((item) => item.id === productId);
             if(product){
                 product.quantity += 1;
             }
         },
-        
         decreaseQuantity : (state , action:PayloadAction<number> ) => {
             const productId = action.payload;
             const product = state.allProducts.find((item) => item.id === productId);
@@ -58,9 +55,9 @@ const quantitySlice = createSlice({
     extraReducers : (builder) => {
         builder.addCase(allData.fulfilled , (state , action) => {
             state.allProducts = action.payload.map((product : Product) => ({...product , quantity:1}));
-        })
+        });
     }
-})
+});
 
 export const {increaseQuantity , decreaseQuantity} = quantitySlice.actions;
 export default quantitySlice.reducer;
